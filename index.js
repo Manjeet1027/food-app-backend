@@ -22,9 +22,29 @@
 */
 
 
+// const express = require("express");
+// const app = express();
+// // const PORT = 5000;
+// const PORT = https://food-app-backend-2gry.onrender.com/;
+// const mongoDB = require("./db");
+// mongoDB();
+// const cors = require('cors');
+
+// app.use(cors());
+// app.use(express.json());
+// app.use("/api", require("./Routes/CreateUser"));
+// app.use("/api", require("./Routes/DisplayData"));
+
+// app.get("/", (req, res) => {
+//   res.send("HELLO WORLD")
+// })
+
+// app.listen(PORT, () => {
+//   console.log(`Listening on port ${PORT}`);
+// })
+
 const express = require("express");
 const app = express();
-const PORT = 5000;
 const mongoDB = require("./db");
 mongoDB();
 const cors = require('cors');
@@ -37,6 +57,10 @@ app.use("/api", require("./Routes/DisplayData"));
 app.get("/", (req, res) => {
   res.send("HELLO WORLD")
 })
+
+// Use the PORT provided by Render, or default to 5000 for local development
+const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
-})
+});
