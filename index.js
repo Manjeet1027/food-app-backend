@@ -46,10 +46,21 @@
 const express = require("express");
 const app = express();
 const mongoDB = require("./db");
+const PORT = process.env.PORT || 5000;
 mongoDB();
-const cors = require('cors');
+// const cors = require('cors');
+// app.use(cors());
 require('dotenv').config();
-app.use(cors());
+
+
+const cors = require('cors');
+app.use(cors({
+  origin: '*', // You can restrict this to your frontend URL for better security
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
+}));
+
+
 app.use(express.json());
 app.use("/api", require("./Routes/CreateUser"));
 app.use("/api", require("./Routes/DisplayData"));
@@ -57,9 +68,6 @@ app.use("/api", require("./Routes/DisplayData"));
 app.get("/", (req, res) => {
   res.send("HELLO WORLD")
 })
-
-// Use the PORT provided by Render, or default to 5000 for local development
-const PORT = process.env.PORT ;
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
