@@ -22,45 +22,23 @@
 */
 
 
-// const express = require("express");
-// const app = express();
-// // const PORT = 5000;
-// const PORT = https://food-app-backend-2gry.onrender.com/;
-// const mongoDB = require("./db");
-// mongoDB();
-// const cors = require('cors');
 
-// app.use(cors());
-// app.use(express.json());
-// app.use("/api", require("./Routes/CreateUser"));
-// app.use("/api", require("./Routes/DisplayData"));
-
-// app.get("/", (req, res) => {
-//   res.send("HELLO WORLD")
-// })
-
-// app.listen(PORT, () => {
-//   console.log(`Listening on port ${PORT}`);
-// })
 
 const express = require("express");
+require('dotenv').config();
 const app = express();
 const mongoDB = require("./db");
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 mongoDB();
 const cors = require('cors');
 app.use(cors());
-require('dotenv').config();
-
-
-
 
 app.use(express.json());
 app.use("/api", require("./Routes/CreateUser"));
 app.use("/api", require("./Routes/DisplayData"));
 
 app.get("/", (req, res) => {
-  res.send("HELLO WORLD")
+  res.send("HELLO WORLD...")
 })
 
 app.listen(PORT, () => {
