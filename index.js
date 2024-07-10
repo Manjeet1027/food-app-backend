@@ -48,17 +48,11 @@ const app = express();
 const mongoDB = require("./db");
 const PORT = process.env.PORT || 5000;
 mongoDB();
-// const cors = require('cors');
-// app.use(cors());
+const cors = require('cors');
+app.use(cors());
 require('dotenv').config();
 
 
-const cors = require('cors');
-app.use(cors({
-  origin: '*', // You can restrict this to your frontend URL for better security
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
-  allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
-}));
 
 
 app.use(express.json());
