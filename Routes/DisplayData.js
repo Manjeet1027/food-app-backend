@@ -8,7 +8,7 @@ router.post("/fooddata", (req, res) => {
   }
   catch(err){
     console.error(err)
-    res.send("Server Error")
+    res.send("Server Error");
   }
 })
 
