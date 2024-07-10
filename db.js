@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 
-// const mongoURL = `mongodb://localhost:27017/goFood`;
-// const mongoURL = process.env.MONGO_URL || `mongodb://localhost:27017/goFood`;
-const mongoURL =
-  "mongodb+srv://manjeetkarnwal1027:goFood123@cluster0.stuvh98.mongodb.net/gofoodMERN?retryWrites=true&w=majority&appName=Cluster0";
+const mongoURL = process.env.Mongo_URL;
 
 const mongoDB = async () => {
   try {
@@ -18,13 +16,13 @@ const mongoDB = async () => {
     const data = await foodData.find({}).toArray();
     // console.log(data);
     global.food_item = data;
-    console.log(global.food_item);
+    // console.log(global.food_item);
 
     const foodCategory = mongoose.connection.db.collection("foodCategory");
     const catData = await foodCategory.find({}).toArray();
     // console.log(catData);
     global.foodCategory = catData;
-    console.log(global.foodCategory);
+    // console.log(global.foodCategory);
   } catch (err) {
     console.log("Failed to connect because : ", err);
   }
