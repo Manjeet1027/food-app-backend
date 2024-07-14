@@ -17,6 +17,8 @@ router.use("/createuser",[
   if(!errors.isEmpty()){
     return res.status(400).json({ error : errors.array()});
   }
+//-
+  let email = req.body.email
 
   const salt = await bcrypt.genSalt(10);
   let securePass = await bcrypt.hash(req.body.password, salt);
@@ -25,13 +27,27 @@ router.use("/createuser",[
   // console.log("Hashed Password:", securePass);
 
   try{
+//-
+    let user = await User.findOne({email});
+    if (user) {
+      return res.status(400).json({ success : false, error: "User already exists" });
+    }
+
     await User.create({
       name :req.body.name,
       location: req.body.location ,
       email : req.body.email,
       password : securePass
     })
-    res.json({success: true})
+    // res.json({success: true})
+    //-
+    const data = {
+      user :{
+        id : req.body.password
+      }
+    }
+    const authToken  = jwt.sign(data, jwtSecret);
+    return res.json({success : true, authToken : authToken})
   }
   catch(err){
     console.log(err);
